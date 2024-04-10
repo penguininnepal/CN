@@ -1,0 +1,100 @@
+Connect 3 Routers With EACH other
+Then Connect 1 Switch to each router
+And finally connect 1 PC and 1 Laptop with every Switch
+Use Fast Ethernet to connect PC, Laptop  with switch
+
+Router1 -> 192.168.18.1
+Router2 -> 192.168.118.1
+Router3 -> 192.168.218.1
+
+
+For Router 1
+
+Router>enable
+Router#config ter
+Router#config terminal 
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#hostname Router1
+Router1(config)#interface gi
+Router1(config)#interface gigabitEthernet 0/0/0
+Router1(config-if)#ip address 192.168.18.1 255.255.255.0
+Router1(config-if)#description connection to first lan 18
+Router1(config-if)#no shut down
+
+Router1(config-if)#
+%LINK-5-CHANGED: Interface GigabitEthernet0/0/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0/0, changed state to up
+do write
+Building configuration...
+[OK]
+Router1(config-if)#do ping 192.168.18.1
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.18.1, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 1/3/8 ms
+
+Router1(config-if)#
+
+
+For Router 2
+
+Router>enable
+Router#config ter
+Router#config terminal 
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#hostname Router2
+Router2(config)#interface gi
+Router2(config)#interface gigabitEthernet 0/0/0
+Router2(config-if)#ip address 192.168.118.1 255.255.255.0
+Router2(config-if)#description connection to second lan 118
+Router2(config-if)#no shutdown
+
+Router2(config-if)#
+%LINK-5-CHANGED: Interface GigabitEthernet0/0/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0/0, changed state to up
+do write
+Building configuration...
+[OK]
+Router2(config-if)#do ping 192.168.118.1
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.118.1, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 1/2/4 ms
+
+Router2(config-if)#
+
+
+For Router 3
+
+Router>enable
+Router#config Ter
+Router#config Terminal 
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#hostname Router3
+Router3(config)#interface gi
+Router3(config)#interface gigabitEthernet 0/0/0
+Router3(config-if)#ip address 192.168.218.1 255.255.255.0
+Router3(config-if)#description connection to third lan 218
+Router3(config-if)#no shutdown
+
+Router3(config-if)#
+%LINK-5-CHANGED: Interface GigabitEthernet0/0/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0/0, changed state to up
+do write
+Building configuration...
+[OK]
+Router3(config-if)#do ping 192.168.218.1
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.218.1, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 2/3/7 ms
+
+Router3(config-if)#
+Router3#
+%SYS-5-CONFIG_I: Configured from console by console
