@@ -1,0 +1,77 @@
+Switch>
+Switch>enable
+Switch#configure terminal
+Switch(config)#hostname S1
+S1(config)#vlan 100
+S1(config-vlan)#name student
+S1(config-vlan)#vlan 200
+S1(config-vlan)#name teachers
+S1(config-vlan)#exit
+S1(config)#exit
+S1#write
+S1#sh vlan
+#check your created vlans
+#Assign vlan to ports for student and teachers
+S1#configure terminal
+S1(config)#interface range fastEthernet 0/1-14
+S1(config-if-range)#switchport mode access
+S1(config-if-range)#switchport access vlan 100
+S1(config-if-range)#no shut
+S1(config-if-range)#exit
+S1(config)#interface range fastEthernet 0/15-24
+S1(config-if-range)#switchport mode access
+S1(config-if-range)#switchport access vlan 200
+S1(config-if-range)#exit
+
+check configuration of port assignment by using command Show Running-configuration
+
+
+ip address to switch for checking vlan access 
+S1(config)#interface vlan 100
+S1(config-if)#ip address 192.168.30.10 255.255.255.0 
+S1(config-if)#description vlan 100 switch ip 
+S1(config-if)#no shut
+S1(config-if)#exit
+S1(config)#interface vlan 200
+S1(config-if)#ip address 192.168.130.10 255.255.255.0
+S1(config-if)# description vlan 200 ip address
+S1(config-if)#no shut
+S1(config-if)#exit
+S1(config)#exit
+S1#write
+
+setting gig interface to Trunk 
+S1(config)#interface g0/1
+S1(config-if)#switch
+S1(config-if)#switchport mod
+S1(config-if)#switchport mode trunk
+Switch(config-if)#switchport trunk allowed vlan all
+
+
+#router configuration for intervlan routing 
+
+
+VlanRouter(config)#interface gigabitEthernet 0/0/0
+VlanRouter(config-if)#no shut
+VlanRouter(config-if)#description connetion to vlan via switch 4
+
+
+for vlan 100 student
+VlanRouter(config)#interface gigabitEthernet 0/0/0.100
+VlanRouter(config-subif)#description connection to vlan of Student 100
+VlanRouter(config-subif)# encapsulation dot1Q 100 
+VlanRouter(config-subif)# ip address 192.168.30.1 255.255.255.0
+VlanRouter(config-subif)#no shut
+
+for vlan 200 teachers
+VlanRouter(config)#interface gigabitEthernet 0/0/0.200
+VlanRouter(config-subif)#description connection to vlan 200 teachers
+VlanRouter(config-subif)#encapsulation dot1Q 200  
+VlanRouter(config-subif)#ip address 192.168.130.1 255.255.255.0
+VlanRouter(config-subif)#no shut
+VlanRouter(config-subif)# write
+
+
+VlanRouter(config)#interface gigabitEthernet 0/0/0
+VlanRouter(config-if)#no shut
+VlanRouter(config-if)#description connetion to vlan via switch 4
