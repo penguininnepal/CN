@@ -31,3 +31,6 @@ R1(config-router)#network 192.168.218.0
 R1(config-router)#network 192.168.252.0
 R1(config-router)#network 192.168.251.0
 R1(config-router)#do write
+
+For RIP configuration
+R1> show ip route
