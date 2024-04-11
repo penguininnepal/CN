@@ -31,3 +31,6 @@ R1(config-router)#do write
 
 Test for Dynamin Routing 
 C:\> Ping 192............
+
+For OSPF configuration
+R1> show ip route OSPF
