@@ -1,0 +1,33 @@
+OSPF Configuration
+
+R1 Router
+R1> enable
+R1#config terminal
+R1(config)#router OSPF 100
+R1(config-router)#network 192.168.18.0 255.255.255.0 area 0
+R1(config-router)#network 192.168.250.0 255.255.255.0 area 0
+R1(config-router)#network 192.168.251.0 255.255.255.0 area 0
+R1(config-router)#do write
+
+
+R2 Router
+R2> enable
+R2# config terminal
+R1(config)#router OSPF 100
+R1(config-router)#network 192.168.118.0 255.255.255.0 area 0
+R1(config-router)#network 192.168.250.0 255.255.255.0 area 0
+R1(config-router)#network 192.168.252.0 255.255.255.0 area 0
+R1(config-router)#do write
+
+
+R3 Router
+R3> enable
+R3#config terminal
+R1(config)#router OSPF 100
+R1(config-router)#network 192.168.218.0 255.255.255.0 area 0
+R1(config-router)#network 192.168.252.0 255.255.255.0 area 0
+R1(config-router)#network 192.168.251.0 255.255.255.0 area 0
+R1(config-router)#do write 
+
+Test for Dynamin Routing 
+C:\> Ping 192............
